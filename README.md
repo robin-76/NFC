@@ -6,7 +6,7 @@
 
 ## Auteurs
 
-|Nom|Prenom|
+|Nom|Prénom|
 |--|--|
 | *GUYOMAR* | *Robin*|
 | *BOURGEAUX* | *Maxence*|
@@ -15,7 +15,7 @@
 
 Petite application mobile pour simuler une feuille d'émargement à l'aide du scan de puce NFC sur android.
 
-## Liste des fonctionalités 
+## Liste des fonctionnalités 
 
 * *Scan* <br/>
   Permet de scanner une carte étudiante disposant d'une puce NFC. Si l'étudiant est déjà enregistré 
