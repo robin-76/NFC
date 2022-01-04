@@ -52,7 +52,14 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="reset"
+        android:onClick="resetHeures"
+        android:text="Reset heures étudiants"
+        android:textColor="@color/white" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="resetDB"
         android:text="Reset DB"
         android:textColor="@color/white" />
 

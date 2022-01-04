@@ -221,6 +221,20 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(etudiant.getId())});
     }
 
+    public int deleteHeuresEtudiant(Etudiant etudiant) {
+        Log.i(TAG, "MyDatabaseHelper.deleteHeuresEtudiant ... ");
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_ETUDIANT_HEUREDEBUT, "");
+        values.put(COLUMN_ETUDIANT_HEUREFIN, "");
+
+        // updating row
+        return db.update(TABLE_ETUDIANT, values, COLUMN_ETUDIANT_ID + " = ?",
+                new String[]{String.valueOf(etudiant.getId())});
+    }
+
     public void deleteEtudiant(Etudiant etudiant) {
         Log.i(TAG, "MyDatabaseHelper.deleteEtudiant ... " + etudiant.getNom() );
 

@@ -142,9 +142,27 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void reset(View v) {
+    public void resetHeures(View v) {
+        for(Etudiant etudiant : etudiantList)
+            db.deleteHeuresEtudiant(etudiant);
+        reset();
+    }
+
+    public void resetDB(View v) {
         db.deleteAllExamens();
         db.deleteAllEtudiants();
+        reset();
+    }
+
+    public void reset() {
+        etudiantList.removeAll(etudiantList);
+        examenList.removeAll(examenList);
+
+        list = db.getAllEtudiants();
+        etudiantList.addAll(list);
+
+        list2 = db.getAllExamens();
+        examenList.addAll(list2);
     }
 
     public void quitter(View v) {
