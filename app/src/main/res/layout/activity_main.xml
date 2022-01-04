@@ -28,6 +28,14 @@
         android:textColor="@color/white" />
 
     <Button
+        android:id="@+id/choixExamen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choix de l'examen"
+        android:onClick="choixExamen"
+        android:textColor="@color/white" />
+
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ajouter examen"
