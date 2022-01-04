@@ -139,6 +139,16 @@ public class MainActivity extends AppCompatActivity {
 
                         choixExam = intent.getStringExtra("choixExamen");
                         button.setText("Choix de l'examen " + " (" + choixExam + ")");
+
+                        for(Examen examen : examenList) {
+                            if(examen.getMatiere().equals(choixExam)) {
+                                date = examen.getDate();
+                                matiere = examen.getMatiere();
+                                professeur = examen.getProfesseur();
+                                heureDebut = examen.getHeureDebut();
+                                heureFin = examen.getHeureFin();
+                            }
+                        }
                     }
                 });
 

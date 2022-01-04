@@ -11,12 +11,13 @@
         android:layout_height="wrap_content"
         android:text="Scan"
         android:onClick="scan"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:layout_marginBottom="15dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ajouter etudiant"
+        android:text="Ajouter un etudiant"
         android:onClick="formulaireEtudiant"
         android:textColor="@color/white" />
 
@@ -25,7 +26,8 @@
         android:layout_height="wrap_content"
         android:text="Liste des etudiants"
         android:onClick="listeEtudiants"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:layout_marginBottom="15dp" />
 
     <Button
         android:id="@+id/choixExamen"
@@ -38,30 +40,33 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ajouter examen"
+        android:text="Ajouter un examen"
         android:onClick="formulaireExamen"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Liste des examens"
         android:onClick="listeExamens"
+        android:textColor="@color/white"
+        android:layout_marginBottom="15dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="resetDB"
+        android:text="Reset heures etudiants"
         android:textColor="@color/white" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="resetHeures"
-        android:text="Reset heures étudiants"
-        android:textColor="@color/white" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="resetDB"
         android:text="Reset DB"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:layout_marginBottom="15dp" />
 
     <Button
         android:layout_width="match_parent"
