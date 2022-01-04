@@ -7,7 +7,6 @@
     android:padding="55dp">
 
     <Button
-        android:id="@+id/scan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Scan"
@@ -15,10 +14,16 @@
         android:textColor="@color/white" />
 
     <Button
-        android:id="@+id/formulaireEtudiant"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ajouter etudiant"
         android:onClick="formulaireEtudiant"
+        android:textColor="@color/white" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="quitter"
+        android:text="Quitter"
         android:textColor="@color/white" />
 </LinearLayout>

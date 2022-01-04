@@ -58,6 +58,7 @@ public class Etudiant implements Serializable {
         this.uid = uid;
     }
 
+    @NonNull
     @Override
     public String toString()  {
         return this.nom;
