@@ -93,10 +93,14 @@ public class MainActivity extends AppCompatActivity {
                         boolean condition = false;
                         for(Etudiant etudiant : etudiantList) {
                             if(etudiant.getUid().equals(uid)) {
-                                if(etudiant.getHeureDebut().equals(""))
+                                if(etudiant.getHeureDebut().equals("")){
                                     db.updateHeureEtudiant(etudiant, heure, prenom, nom, true);
-                                else if(etudiant.getHeureFin().equals(""))
+                                    Toast.makeText(this, "Heure de début scanné", Toast.LENGTH_SHORT).show();
+                                }
+                                else if(etudiant.getHeureFin().equals("")) {
                                     db.updateHeureEtudiant(etudiant, heure, prenom, nom, false);
+                                    Toast.makeText(this, "Heure de fin scanné", Toast.LENGTH_SHORT).show();
+                                }
                                 condition = true;
                             }
                         }

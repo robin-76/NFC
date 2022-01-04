@@ -98,15 +98,15 @@ public class Scan extends AppCompatActivity {
 
         if (!condition) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Information de l'étudiant");
+            builder.setTitle("Informations de l'étudiant");
 
             final EditText editPrenom = new EditText(this);
             editPrenom.setHint("Prénom ...");
             final EditText editNom = new EditText(this);
             editNom.setHint("Nom ...");
 
-            editPrenom.setInputType(InputType.TYPE_CLASS_TEXT);
-            editNom.setInputType(InputType.TYPE_CLASS_TEXT);
+            editPrenom.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+            editNom.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 
             LinearLayout layout = new LinearLayout(this);
             layout.setOrientation(LinearLayout.VERTICAL);

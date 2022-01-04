@@ -23,15 +23,6 @@ public class Etudiant implements Serializable {
         this.heureFin = heureFin;
     }
 
-    public Etudiant(int id, String prenom, String nom, String uid, String heureDebut, String heureFin) {
-        this.id = id;
-        this.prenom = prenom;
-        this.nom = nom;
-        this.uid = uid;
-        this.heureDebut = heureDebut;
-        this.heureFin = heureFin;
-    }
-
     public int getId() {
         return id;
     }
