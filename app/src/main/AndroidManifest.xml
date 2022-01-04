@@ -24,6 +24,7 @@
         <activity android:name=".FormulaireEtudiant" />
         <activity android:name=".ListeEtudiants" />
         <activity android:name=".FormulaireExamen" />
+        <activity android:name=".ListeExamens" />
     </application>
 
 </manifest>

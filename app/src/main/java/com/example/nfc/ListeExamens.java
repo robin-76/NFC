@@ -10,28 +10,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class ListeEtudiants extends AppCompatActivity {
+public class ListeExamens extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_liste_etudiants);
+        setContentView(R.layout.activity_liste_examens);
 
         Intent intent = getIntent();
-        ArrayList<Etudiant> list = (ArrayList<Etudiant>) intent.getSerializableExtra("list");
+        ArrayList<Examen> list = (ArrayList<Examen>) intent.getSerializableExtra("list");
 
         ArrayList<String> score = new ArrayList<>();
         ListView listView = findViewById(R.id.listView);
 
         TextView nombre = findViewById(R.id.nombre);
-        nombre.setText(" Nombre total d'étudiants : " + list.size());
+        nombre.setText(" Nombre total d'examens : " + list.size());
 
-        for(Etudiant etudiant : list)
-            score.add("Prénom : " + etudiant.getPrenom() + "\nNom : "
-                    + etudiant.getNom() + "\nUID : " + etudiant.getUid() + "\nDébut : "
-                    + etudiant.getHeureDebut() + "\nFin : " + etudiant.getHeureFin());
+        for(Examen examen : list)
+            score.add("Matière : " + examen.getMatiere() + "\nProfesseur : " + examen.getProfesseur()
+                    + "\nDate : " + examen.getDate()
+                    + "\nDébut : " + examen.getHeureDebut() + "h\nFin : " + examen.getHeureFin() + "h");
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter<>(this, R.layout.activity_liste_etudiants,
+        ArrayAdapter arrayAdapter = new ArrayAdapter<>(this, R.layout.activity_liste_examens,
                 R.id.textView, score);
         listView.setAdapter(arrayAdapter);
     }
 }
+

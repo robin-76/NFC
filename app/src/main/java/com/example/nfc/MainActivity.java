@@ -7,12 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class MainActivity extends AppCompatActivity {
     private final List<Etudiant> etudiantList = new ArrayList<>();
@@ -102,6 +100,14 @@ public class MainActivity extends AppCompatActivity {
     public void formulaireExamen(View v) {
         Intent intent = new Intent(this, FormulaireExamen.class);
         formulaireExamen.launch(intent);
+    }
+
+    public void listeExamens(View v) {
+        ArrayList<Examen> list = new ArrayList<>(examenList);
+
+        Intent listeExamens = new Intent(this, ListeExamens.class);
+        listeExamens.putExtra("list", list);
+        startActivity(listeExamens);
     }
 
     public void reset(View v) {
