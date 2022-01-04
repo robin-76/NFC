@@ -65,22 +65,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void createDefaultEtudiantsIfNeed()  {
-            Etudiant etudiant1 = new Etudiant("Robin",
-                    "Guyomar", "0123","10h30","11h50");
-            Etudiant etudiant2 = new Etudiant("Test2",
-                    "aaaa", "456","14h10","16h59");
-            this.addEtudiant(etudiant1);
-            this.addEtudiant(etudiant2);
-    }
-
-    public void createExamen()  {
-            Examen examen1 = new Examen("04/01/2022", "Web", "Pigne", "10", "12");
-            Examen examen2 = new Examen("04/01/2022", "Mobile", "Amanton", "14", "17");
-            this.addExamen(examen1);
-            this.addExamen(examen2);
-        }
-
     public void addEtudiant(Etudiant etudiant) {
         Log.i(TAG, "MyDatabaseHelper.addEtudiant ... " + etudiant.getNom());
 

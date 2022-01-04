@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="55dp">
+    android:padding="25dp">
 
     <Button
         android:layout_width="match_parent"
@@ -69,4 +69,12 @@
         android:onClick="quitter"
         android:text="Quitter"
         android:textColor="@color/white" />
+
+    <ImageView
+        android:id="@+id/PDFimg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="generatePDF"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/pdf" />
 </LinearLayout>
