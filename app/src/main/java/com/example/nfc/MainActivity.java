@@ -39,11 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
         db = new MyDatabaseHelper(this);
 
-        db.createDefaultEtudiantsIfNeed();
         list =  db.getAllEtudiants();
         this.etudiantList.addAll(list);
 
-        db.createExamen();
         list2 = db.getAllExamens();
         this.examenList.addAll(list2);
 
@@ -155,8 +153,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void reset() {
-        etudiantList.removeAll(etudiantList);
-        examenList.removeAll(examenList);
+        etudiantList.clear();
+        examenList.clear();
 
         list = db.getAllEtudiants();
         etudiantList.addAll(list);

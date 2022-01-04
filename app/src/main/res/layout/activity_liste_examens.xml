@@ -10,7 +10,6 @@
         android:id="@+id/nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
         android:text="" />
 
     <ListView
@@ -21,6 +20,5 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white" />
+        android:layout_height="wrap_content" />
 </LinearLayout>

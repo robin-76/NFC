@@ -66,26 +66,20 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void createDefaultEtudiantsIfNeed()  {
-        int count = this.getEtudiantsCount();
-        if(count ==0 ) {
             Etudiant etudiant1 = new Etudiant("Robin",
                     "Guyomar", "0123","10h30","11h50");
             Etudiant etudiant2 = new Etudiant("Test2",
                     "aaaa", "456","14h10","16h59");
             this.addEtudiant(etudiant1);
             this.addEtudiant(etudiant2);
-        }
     }
 
     public void createExamen()  {
-        int count = this.getExamensCount();
-        if(count == 0 ) {
             Examen examen1 = new Examen("04/01/2022", "Web", "Pigne", "10", "12");
             Examen examen2 = new Examen("04/01/2022", "Mobile", "Amanton", "14", "17");
             this.addExamen(examen1);
             this.addExamen(examen2);
         }
-    }
 
     public void addEtudiant(Etudiant etudiant) {
         Log.i(TAG, "MyDatabaseHelper.addEtudiant ... " + etudiant.getNom());
@@ -177,48 +171,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return examenList;
-    }
-
-    public int getEtudiantsCount() {
-        Log.i(TAG, "MyDatabaseHelper.getEtudiantsCount ... " );
-
-        String countQuery = "SELECT  * FROM " + TABLE_ETUDIANT;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(countQuery, null);
-
-        int count = cursor.getCount();
-        cursor.close();
-        return count;
-    }
-
-    public int getExamensCount() {
-        Log.i(TAG, "MyDatabaseHelper.getExamensCount ... " );
-
-        String countQuery = "SELECT  * FROM " + TABLE_EXAMEN;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(countQuery, null);
-
-        int count = cursor.getCount();
-        cursor.close();
-        return count;
-    }
-
-
-    public int updateEtudiant(Etudiant etudiant) {
-        Log.i(TAG, "MyDatabaseHelper.updateEtudiant ... "  + etudiant.getNom());
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_ETUDIANT_PRENOM, etudiant.getPrenom());
-        values.put(COLUMN_ETUDIANT_NOM, etudiant.getNom());
-        values.put(COLUMN_ETUDIANT_UID, etudiant.getUid());
-        values.put(COLUMN_ETUDIANT_HEUREDEBUT, etudiant.getHeureDebut());
-        values.put(COLUMN_ETUDIANT_HEUREFIN, etudiant.getHeureFin());
-
-        // updating row
-        return db.update(TABLE_ETUDIANT, values, COLUMN_ETUDIANT_ID + " = ?",
-                new String[]{String.valueOf(etudiant.getId())});
     }
 
     public int deleteHeuresEtudiant(Etudiant etudiant) {

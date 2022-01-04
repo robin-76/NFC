@@ -23,15 +23,6 @@ public class Examen implements Serializable {
         this.heureFin = heureFin;
     }
 
-    public Examen(int id, String date, String matiere, String professeur, String heureDebut, String heureFin) {
-        this.id = id;
-        this.date = date;
-        this.matiere = matiere;
-        this.professeur = professeur;
-        this.heureDebut = heureDebut;
-        this.heureFin = heureFin;
-    }
-
     public int getId() {
         return id;
     }
