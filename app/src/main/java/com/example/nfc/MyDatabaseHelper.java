@@ -51,9 +51,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         String script2 = "CREATE TABLE " + TABLE_EXAMEN + "("
                 + COLUMN_EXAMEN_ID + " INTEGER PRIMARY KEY," + COLUMN_EXAMEN_DATE + " TEXT,"
                 + COLUMN_EXAMEN_MATIERE + " TEXT," + COLUMN_EXAMEN_PROFESSEUR + " TEXT,"
-                + COLUMN_EXAMEN_HEUREDEBUT + " TEXT," + COLUMN_EXAMEN_HEUREFIN + " TEXT,"
-                + COLUMN_ETUDIANT_ID  + " INTEGER," + "FOREIGN KEY (" + COLUMN_ETUDIANT_ID
-                + ") REFERENCES " + TABLE_ETUDIANT + "(" + COLUMN_ETUDIANT_ID + "))";
+                + COLUMN_EXAMEN_HEUREDEBUT + " TEXT," + COLUMN_EXAMEN_HEUREFIN + " TEXT" + ")";
 
         db.execSQL(script);
         db.execSQL(script2);
