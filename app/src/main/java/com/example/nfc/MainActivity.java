@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Etudiant> list;
     private List<Examen> list2;
 
+    private ActivityResultLauncher<Intent> scan;
     private ActivityResultLauncher<Intent> formulaireEtudiant;
     private ActivityResultLauncher<Intent> choixExamen;
     private ActivityResultLauncher<Intent> formulaireExamen;
@@ -47,6 +48,40 @@ public class MainActivity extends AppCompatActivity {
 
         choix = "";
         button = findViewById(R.id.choixExamen);
+
+        scan = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent intent = result.getData();
+                        assert intent != null;
+
+                        String uid = intent.getStringExtra("uid");
+                        String heure = intent.getStringExtra("heure");
+                        String prenom = intent.getStringExtra("prenom");
+                        String nom = intent.getStringExtra("nom");
+
+                        boolean condition = false;
+                        for(Etudiant etudiant : etudiantList) {
+                            if(etudiant.getUid().equals(uid)) {
+                                if(etudiant.getHeureDebut().equals(""))
+                                    db.updateHeureEtudiant(etudiant, heure, prenom, nom, true);
+                                else if(etudiant.getHeureFin().equals(""))
+                                    db.updateHeureEtudiant(etudiant, heure, prenom, nom, false);
+                                condition = true;
+                            }
+                        }
+                        if(!condition) {
+                            Etudiant nouveau = new Etudiant(prenom, nom, uid, heure, "");
+                            db.addEtudiant(nouveau);
+
+                            list = db.getAllEtudiants();
+                            etudiantList.addAll(list);
+                        }
+
+                        reset();
+                    }
+                });
 
         formulaireEtudiant = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -102,8 +137,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void scan(View v) {
+        ArrayList<Etudiant> list = new ArrayList<>(etudiantList);
+
         Intent intent = new Intent(this, Scan.class);
-        startActivity(intent);
+        intent.putExtra("list", list);
+        scan.launch(intent);
     }
 
     public void formulaireEtudiant(View v) {
