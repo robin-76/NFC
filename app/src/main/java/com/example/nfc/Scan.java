@@ -1,33 +1,50 @@
 package com.example.nfc;
 
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.nfc.Tag;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.text.InputType;
+import android.view.Gravity;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Calendar;
+
 
 public class Scan extends AppCompatActivity {
     private NfcAdapter adapter;
     private PendingIntent mPendingIntent;
 
-    private TextView textView;
+    private ArrayList<Etudiant> list;
+
+    private String nom, prenom;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
 
-        textView = findViewById(R.id.etudiant);
-
         Intent intent = getIntent();
+        list = (ArrayList<Etudiant>) intent.getSerializableExtra("list");
 
         NfcManager manager = (NfcManager) this.getSystemService(Context.NFC_SERVICE);
         adapter = manager.getDefaultAdapter();
+
+        nom = "";
+        prenom = "";
 
         if (adapter != null) {
             if (adapter.isEnabled()) {
@@ -57,17 +74,74 @@ public class Scan extends AppCompatActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        getTagInfo(intent);
+        String uid = getTagInfo(intent);
+        updateHeure(uid);
     }
 
-    private void getTagInfo(Intent intent) {
+    private String getTagInfo(Intent intent) {
         byte[] uid = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
-
-        String s = new BigInteger(uid).toString(16);
-        afficherMessage(s);
+        return new BigInteger(uid).toString(16);
     }
 
-    public void afficherMessage(String s) {
-        textView.setText(s);
+    private void updateHeure(String uid) {
+        boolean condition = false;
+
+        for (Etudiant etudiant : list) {
+            if (etudiant.getUid().equals(uid)) {
+                condition = true;
+                prenom = etudiant.getPrenom();
+                nom = etudiant.getNom();
+                finish(uid);
+                break;
+            }
+        }
+
+        if (!condition) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Information de l'étudiant");
+
+            final EditText editPrenom = new EditText(this);
+            editPrenom.setHint("Prénom ...");
+            final EditText editNom = new EditText(this);
+            editNom.setHint("Nom ...");
+
+            editPrenom.setInputType(InputType.TYPE_CLASS_TEXT);
+            editNom.setInputType(InputType.TYPE_CLASS_TEXT);
+
+            LinearLayout layout = new LinearLayout(this);
+            layout.setOrientation(LinearLayout.VERTICAL);
+            layout.addView(editPrenom);
+            layout.addView(editNom);
+            builder.setView(layout);
+
+            builder.setPositiveButton("Ok", (dialog, whichButton) -> {
+                prenom = editPrenom.getText().toString();
+                nom = editNom.getText().toString();
+
+                finish(uid);
+            });
+
+            builder.setNegativeButton("Cancel", (dialog, whichButton) -> dialog.cancel());
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+    }
+
+    public void finish(String uid) {
+        Calendar date = Calendar.getInstance();
+        int hour = date.get(Calendar.HOUR_OF_DAY);
+        int minute = date.get(Calendar.MINUTE);
+
+        Intent intent = new Intent();
+        intent.putExtra("uid", uid);
+        if (minute < 10)
+            intent.putExtra("heure", hour + "h0" + minute);
+        else
+            intent.putExtra("heure", hour + "h" + minute);
+        intent.putExtra("prenom", prenom);
+        intent.putExtra("nom", nom);
+
+        setResult(RESULT_OK, intent);
+        this.finish();
     }
 }

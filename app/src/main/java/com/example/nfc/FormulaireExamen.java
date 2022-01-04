@@ -5,16 +5,11 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class FormulaireExamen extends AppCompatActivity {
     private int lastSelectedYear;
@@ -70,7 +65,7 @@ public class FormulaireExamen extends AppCompatActivity {
             lastSelectedDayOfMonth = dayOfMonth;
         };
         datePickerDialog = new DatePickerDialog(this,
-                    dateSetListener, lastSelectedYear, lastSelectedMonth, lastSelectedDayOfMonth);
+                dateSetListener, lastSelectedYear, lastSelectedMonth, lastSelectedDayOfMonth);
         datePickerDialog.show();
     }
 
@@ -91,7 +86,7 @@ public class FormulaireExamen extends AppCompatActivity {
             lastSelectedMinute = minute;
         };
         timePickerDialog = new TimePickerDialog(this,
-                    timeSetListener, lastSelectedHour, lastSelectedMinute, true);
+                timeSetListener, lastSelectedHour, lastSelectedMinute, true);
         timePickerDialog.show();
     }
 

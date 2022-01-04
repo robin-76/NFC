@@ -95,21 +95,28 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public Etudiant getEtudiant(int id) {
-        Log.i(TAG, "MyDatabaseHelper.getEtudiant ... " + id);
-        SQLiteDatabase db = this.getReadableDatabase();
+    public int updateHeureEtudiant(Etudiant etudiant, String heure, String prenom, String nom,
+                                   boolean heureDebut) {
+        Log.i(TAG, "MyDatabaseHelper.updateHeureEtudiant ... ");
 
-        Cursor cursor = db.query(TABLE_ETUDIANT, new String[] { COLUMN_ETUDIANT_ID,
-                        COLUMN_ETUDIANT_PRENOM, COLUMN_ETUDIANT_NOM, COLUMN_ETUDIANT_UID,
-                        COLUMN_ETUDIANT_HEUREDEBUT, COLUMN_ETUDIANT_HEUREFIN }, COLUMN_ETUDIANT_ID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+        SQLiteDatabase db = this.getWritableDatabase();
 
-        if (cursor != null)
-            cursor.moveToFirst();
+        ContentValues values = new ContentValues();
+        if(heureDebut) {
+            values.put(COLUMN_ETUDIANT_HEUREDEBUT, heure);
+            values.put(COLUMN_ETUDIANT_PRENOM, prenom);
+            values.put(COLUMN_ETUDIANT_NOM, nom);
+        } else {
+            values.put(COLUMN_ETUDIANT_HEUREFIN, heure);
+            values.put(COLUMN_ETUDIANT_PRENOM, prenom);
+            values.put(COLUMN_ETUDIANT_NOM, nom);
+        }
 
-        return new Etudiant(cursor.getInt(0), cursor.getString(1),
-                cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+        // updating row
+        return db.update(TABLE_ETUDIANT, values, COLUMN_ETUDIANT_ID + " = ?",
+                new String[]{String.valueOf(etudiant.getId())});
     }
+
 
     public List<Etudiant> getAllEtudiants() {
         Log.i(TAG, "MyDatabaseHelper.getAllEtudiants ... " );
@@ -169,15 +176,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         // updating row
         return db.update(TABLE_ETUDIANT, values, COLUMN_ETUDIANT_ID + " = ?",
                 new String[]{String.valueOf(etudiant.getId())});
-    }
-
-    public void deleteEtudiant(Etudiant etudiant) {
-        Log.i(TAG, "MyDatabaseHelper.deleteEtudiant ... " + etudiant.getNom() );
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_ETUDIANT, COLUMN_ETUDIANT_ID + " = ?",
-                new String[] { String.valueOf(etudiant.getId()) });
-        db.close();
     }
 
     public void deleteAllEtudiants() {
