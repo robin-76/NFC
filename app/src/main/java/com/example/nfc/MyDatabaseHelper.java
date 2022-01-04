@@ -48,9 +48,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         int count = this.getEtudiantsCount();
         if(count ==0 ) {
             Etudiant etudiant1 = new Etudiant("Robin",
-                    "Guyomar", 0123);
+                    "Guyomar", "012345ab1234");
             Etudiant etudiant2 = new Etudiant("Test2",
-                    "aaaa", 456);
+                    "aaaa", "012345cd5678");
             this.addEtudiant(etudiant1);
             this.addEtudiant(etudiant2);
         }
@@ -83,7 +83,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
         Etudiant etudiant = new Etudiant(cursor.getInt(0), cursor.getString(1),
-                 cursor.getString(2), cursor.getInt(3));
+                 cursor.getString(2), cursor.getString(3));
 
         return etudiant;
     }
@@ -103,7 +103,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 etudiant.setId(Integer.parseInt(cursor.getString(0)));
                 etudiant.setPrenom(cursor.getString(1));
                 etudiant.setNom(cursor.getString(2));
-                etudiant.setUid(cursor.getInt(3));
+                etudiant.setUid(cursor.getString(3));
                 etudiantList.add(etudiant);
             } while (cursor.moveToNext());
         }

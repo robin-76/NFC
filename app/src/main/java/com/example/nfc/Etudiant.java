@@ -1,5 +1,7 @@
 package com.example.nfc;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
 public class Etudiant implements Serializable {
@@ -7,17 +9,17 @@ public class Etudiant implements Serializable {
     private int id;
     private String prenom;
     private String nom;
-    private int uid;
+    private String uid;
 
     public Etudiant() {}
 
-    public Etudiant(String prenom, String nom, int uid) {
+    public Etudiant(String prenom, String nom, String uid) {
         this.prenom = prenom;
         this.nom = nom;
         this.uid = uid;
     }
 
-    public Etudiant(int id, String prenom, String nom, int uid) {
+    public Etudiant(int id, String prenom, String nom, String uid) {
         this.id = id;
         this.prenom = prenom;
         this.nom = nom;
@@ -48,11 +50,11 @@ public class Etudiant implements Serializable {
         this.nom = nom;
     }
 
-    public int getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 
