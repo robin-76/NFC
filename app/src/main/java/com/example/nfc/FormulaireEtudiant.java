@@ -23,8 +23,8 @@ public class FormulaireEtudiant extends AppCompatActivity {
 
     public void validate(View v) {
         Intent result = new Intent();
-        result.putExtra("prenom", nom.getText().toString());
-        result.putExtra("nom", prenom.getText().toString());
+        result.putExtra("prenom", prenom.getText().toString());
+        result.putExtra("nom", nom.getText().toString());
         result.putExtra("uid", uid.getText().toString());
         setResult(RESULT_OK, result);
         this.finish();

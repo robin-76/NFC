@@ -17,7 +17,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ajouter etudiant"
+        android:text="Ajouter un etudiant"
         android:onClick="formulaireEtudiant"
         android:textColor="@color/white" />
 
@@ -40,7 +40,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ajouter examen"
+        android:text="Ajouter un examen"
         android:onClick="formulaireExamen"
         android:textColor="@color/white"
         />
@@ -52,6 +52,13 @@
         android:onClick="listeExamens"
         android:textColor="@color/white"
         android:layout_marginBottom="15dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="resetDB"
+        android:text="Reset heures etudiants"
+        android:textColor="@color/white" />
 
     <Button
         android:layout_width="match_parent"
