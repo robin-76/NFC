@@ -131,10 +131,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        Etudiant etudiant = new Etudiant(cursor.getInt(0), cursor.getString(1),
+        return new Etudiant(cursor.getInt(0), cursor.getString(1),
                 cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
-
-        return etudiant;
     }
 
     public List<Etudiant> getAllEtudiants() {

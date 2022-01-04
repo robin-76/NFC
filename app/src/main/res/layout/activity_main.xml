@@ -23,6 +23,13 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Liste des etudiants"
+        android:onClick="listeEtudiants"
+        android:textColor="@color/white" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Ajouter examen"
         android:onClick="formulaireExamen"
         android:textColor="@color/white" />

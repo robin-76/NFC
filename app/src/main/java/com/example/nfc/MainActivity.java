@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -35,20 +36,9 @@ public class MainActivity extends AppCompatActivity {
         list =  db.getAllEtudiants();
         this.etudiantList.addAll(list);
 
-        for(Etudiant elem: etudiantList) {
-            System.out.println ("Etudiant n°" + elem.getId() + " : " + elem.getPrenom()
-                    + " " + elem.getNom() + " " + elem.getUid());
-        }
-
         db.createExamen();
         list2 = db.getAllExamens();
         this.examenList.addAll(list2);
-
-        for(Examen exam: examenList) {
-            System.out.println ("Examen n°" + exam.getId() + " : " + exam.getDate()
-                    + " " + exam.getMatiere() + " " + exam.getProfesseur() + " "
-                    + exam.getHeureDebut() + " " + exam.getHeureFin());
-        }
 
         formulaireEtudiant = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -66,11 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
                         list = db.getAllEtudiants();
                         etudiantList.addAll(list);
-
-                        for(Etudiant elem: etudiantList) {
-                            System.out.println ("Etudiant n°" + elem.getId() + " : " + elem.getPrenom()
-                                    + " " + elem.getNom() + " " + elem.getUid());
-                        }
                     }
                 });
 
@@ -92,12 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
                         list2 = db.getAllExamens();
                         examenList.addAll(list2);
-
-                        for(Examen exam: examenList) {
-                            System.out.println ("Examen n°" + exam.getId() + " : " + exam.getDate()
-                                    + " " + exam.getMatiere() + " " + exam.getProfesseur() + " "
-                                    + exam.getHeureDebut() + " " + exam.getHeureFin());
-                        }
                     }
                 });
     }
@@ -110,6 +89,14 @@ public class MainActivity extends AppCompatActivity {
     public void formulaireEtudiant(View v) {
         Intent intent = new Intent(this, FormulaireEtudiant.class);
         formulaireEtudiant.launch(intent);
+    }
+
+    public void listeEtudiants(View v) {
+        ArrayList<Etudiant> list = new ArrayList<>(etudiantList);
+
+        Intent listeEtudiants = new Intent(this, ListeEtudiants.class);
+        listeEtudiants.putExtra("list", list);
+        startActivity(listeEtudiants);
     }
 
     public void formulaireExamen(View v) {
