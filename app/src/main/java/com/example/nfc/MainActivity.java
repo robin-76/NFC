@@ -9,18 +9,34 @@ import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     NfcAdapter adapter;
     PendingIntent mPendingIntent;
 
+    private final List<Etudiant> etudiantList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MyDatabaseHelper db = new MyDatabaseHelper(this);
+        db.createDefaultEtudiantsIfNeed();
+
+        List<Etudiant> list=  db.getAllEtudiants();
+        this.etudiantList.addAll(list);
+
+        for(Etudiant elem: etudiantList) {
+            System.out.println ("etudiant : " + elem.getPrenom() + elem.getNom() + elem.getUid());
+        }
+
         Intent intent;
         intent = this.getIntent();
 
