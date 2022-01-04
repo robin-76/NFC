@@ -22,7 +22,10 @@
         </activity>
         <activity android:name=".Scan" />
         <activity android:name=".FormulaireEtudiant" />
+        <activity android:name=".ListeEtudiants" />
+        <activity android:name=".ChoixExamen" />
         <activity android:name=".FormulaireExamen" />
+        <activity android:name=".ListeExamens" />
     </application>
 
 </manifest>

@@ -50,9 +50,8 @@ public class Scan extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (adapter != null) {
+        if (adapter != null)
             adapter.disableForegroundDispatch(this);
-        }
     }
 
     @Override

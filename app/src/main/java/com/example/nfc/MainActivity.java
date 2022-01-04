@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,17 +16,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 public class MainActivity extends AppCompatActivity {
     private final List<Etudiant> etudiantList = new ArrayList<>();
     private final List<Examen> examenList = new ArrayList<>();
 
+    private MyDatabaseHelper db;
+
     private List<Etudiant> list;
     private List<Examen> list2;
 
-    private MyDatabaseHelper db;
     private ActivityResultLauncher<Intent> formulaireEtudiant;
+    private ActivityResultLauncher<Intent> choixExamen;
     private ActivityResultLauncher<Intent> formulaireExamen;
+
+    private String choix;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,20 +43,12 @@ public class MainActivity extends AppCompatActivity {
         list =  db.getAllEtudiants();
         this.etudiantList.addAll(list);
 
-        for(Etudiant elem: etudiantList) {
-            System.out.println ("Etudiant n°" + elem.getId() + " : " + elem.getPrenom()
-                    + " " + elem.getNom() + " " + elem.getUid());
-        }
-
         db.createExamen();
         list2 = db.getAllExamens();
         this.examenList.addAll(list2);
 
-        for(Examen exam: examenList) {
-            System.out.println ("Examen n°" + exam.getId() + " : " + exam.getDate()
-                    + " " + exam.getMatiere() + " " + exam.getProfesseur() + " "
-                    + exam.getHeureDebut() + " " + exam.getHeureFin());
-        }
+        choix = "";
+        button = findViewById(R.id.choixExamen);
 
         formulaireEtudiant = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -69,11 +66,18 @@ public class MainActivity extends AppCompatActivity {
 
                         list = db.getAllEtudiants();
                         etudiantList.addAll(list);
+                    }
+                });
 
-                        for(Etudiant elem: etudiantList) {
-                            System.out.println ("Etudiant n°" + elem.getId() + " : " + elem.getPrenom()
-                                    + " " + elem.getNom() + " " + elem.getUid());
-                        }
+        choixExamen = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent intent = result.getData();
+                        assert intent != null;
+
+                        choix = intent.getStringExtra("choixExamen");
+                        button.setText("Choix de l'examen " + " (" + choix + ")");
                     }
                 });
 
@@ -95,19 +99,13 @@ public class MainActivity extends AppCompatActivity {
 
                         list2 = db.getAllExamens();
                         examenList.addAll(list2);
-
-                        for(Examen exam: examenList) {
-                            System.out.println ("Examen n°" + exam.getId() + " : " + exam.getDate()
-                                    + " " + exam.getMatiere() + " " + exam.getProfesseur() + " "
-                                    + exam.getHeureDebut() + " " + exam.getHeureFin());
-                        }
                     }
                 });
     }
 
     public void scan(View v) {
-        Intent scan = new Intent(this, Scan.class);
-        startActivity(scan);
+        Intent intent = new Intent(this, Scan.class);
+        startActivity(intent);
     }
 
     public void formulaireEtudiant(View v) {
@@ -115,9 +113,33 @@ public class MainActivity extends AppCompatActivity {
         formulaireEtudiant.launch(intent);
     }
 
+    public void listeEtudiants(View v) {
+        ArrayList<Etudiant> list = new ArrayList<>(etudiantList);
+
+        Intent intent = new Intent(this, ListeEtudiants.class);
+        intent.putExtra("list", list);
+        startActivity(intent);
+    }
+
+    public void choixExamen(View v) {
+        ArrayList<Examen> list = new ArrayList<>(examenList);
+
+        Intent intent = new Intent(this, ChoixExamen.class);
+        intent.putExtra("list", list);
+        choixExamen.launch(intent);
+    }
+
     public void formulaireExamen(View v) {
         Intent intent = new Intent(this, FormulaireExamen.class);
         formulaireExamen.launch(intent);
+    }
+
+    public void listeExamens(View v) {
+        ArrayList<Examen> list = new ArrayList<>(examenList);
+
+        Intent intent = new Intent(this, ListeExamens.class);
+        intent.putExtra("list", list);
+        startActivity(intent);
     }
 
     public void reset(View v) {
