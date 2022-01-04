@@ -23,6 +23,13 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="reset"
+        android:text="Reset DB"
+        android:textColor="@color/white" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="quitter"
         android:text="Quitter"
         android:textColor="@color/white" />

@@ -140,7 +140,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void deleteEtudiant(Etudiant etudiant) {
-        Log.i(TAG, "MyDatabaseHelper.updateEtudiant ... " + etudiant.getNom() );
+        Log.i(TAG, "MyDatabaseHelper.deleteEtudiant ... " + etudiant.getNom() );
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_ETUDIANT, COLUMN_ETUDIANT_ID + " = ?",
@@ -148,4 +148,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void deleteAllEtudiants() {
+        Log.i(TAG, "MyDatabaseHelper.deleteAllEtudiants ... " );
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+ TABLE_ETUDIANT);
+    }
 }

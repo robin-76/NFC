@@ -60,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
         someActivityResultLauncher.launch(intent);
     }
 
+    public void reset(View v) {
+        db.deleteAllEtudiants();
+    }
+
     public void quitter(View v) {
         this.finish();
     }
