@@ -63,7 +63,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="resetDB"
+        android:onClick="resetHeures"
         android:text="Reset DB"
         android:textColor="@color/white"
         android:layout_marginBottom="15dp" />
