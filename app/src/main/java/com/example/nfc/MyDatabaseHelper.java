@@ -51,7 +51,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         String script2 = "CREATE TABLE " + TABLE_EXAMEN + "("
                 + COLUMN_EXAMEN_ID + " INTEGER PRIMARY KEY," + COLUMN_EXAMEN_DATE + " TEXT,"
                 + COLUMN_EXAMEN_MATIERE + " TEXT," + COLUMN_EXAMEN_PROFESSEUR + " TEXT,"
-                + COLUMN_EXAMEN_HEUREDEBUT + " TEXT," + COLUMN_EXAMEN_HEUREFIN + " TEXT" + ")";
+                + COLUMN_EXAMEN_HEUREDEBUT + " TEXT," + COLUMN_EXAMEN_HEUREFIN + " TEXT,"
+                + COLUMN_ETUDIANT_ID  + " INTEGER," + "FOREIGN KEY (" + COLUMN_ETUDIANT_ID
+                + ") REFERENCES " + TABLE_ETUDIANT + "(" + COLUMN_ETUDIANT_ID + "))";
 
         db.execSQL(script);
         db.execSQL(script2);
@@ -79,7 +81,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     public void createExamen()  {
         int count = this.getExamensCount();
-        if(count ==0 ) {
+        if(count == 0 ) {
             Examen examen1 = new Examen("04/01/2022", "Web", "Pigne", "10", "12");
             Examen examen2 = new Examen("04/01/2022", "Mobile", "Amanton", "14", "17");
             this.addExamen(examen1);
@@ -237,5 +239,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("delete from "+ TABLE_ETUDIANT);
+    }
+
+    public void deleteAllExamens() {
+        Log.i(TAG, "MyDatabaseHelper.deleteAllExamens ... " );
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+ TABLE_EXAMEN);
     }
 }

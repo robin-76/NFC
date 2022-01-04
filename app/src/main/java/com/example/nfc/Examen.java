@@ -1,7 +1,8 @@
 package com.example.nfc;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
-import java.util.Date;
 
 public class Examen implements Serializable {
 
@@ -79,6 +80,7 @@ public class Examen implements Serializable {
         this.heureFin = heureFin;
     }
 
+    @NonNull
     @Override
     public String toString()  {
         return this.matiere;
