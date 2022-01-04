@@ -15,8 +15,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private final List<Etudiant> etudiantList = new ArrayList<>();
+    private final List<Examen> examenList = new ArrayList<>();
     private MyDatabaseHelper db;
-    private List<Etudiant> list;
     private ActivityResultLauncher<Intent> someActivityResultLauncher;
 
     @Override
@@ -26,7 +26,23 @@ public class MainActivity extends AppCompatActivity {
 
         db = new MyDatabaseHelper(this);
 
-        someActivityResultLauncher = registerForActivityResult(
+        db.createDefaultEtudiantsIfNeed();
+        List<Etudiant> list=  db.getAllEtudiants();
+        this.etudiantList.addAll(list);
+
+        for(Etudiant etd: etudiantList) {
+            System.out.println ("etudiant : " + etd.getPrenom() + etd.getNom() + etd.getUid() +etd.getHeureDebut()+etd.getHeureFin());
+        }
+
+        db.createExamen();
+        List<Examen> list2=  db.getAllExamens();
+        this.examenList.addAll(list2);
+
+        for(Examen exam: examenList) {
+            System.out.println ("examen : " + exam.getDate() + exam.getMatiere() + exam.getProfesseur() +exam.getHeureDebut()+exam.getHeureFin());
+        }
+
+       /* someActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
@@ -47,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                             System.out.println ("etudiant : " + elem.getPrenom() + " " + elem.getNom() + " " + elem.getUid());
                         }
                     }
-                });
+                }); */
     }
 
     public void scan(View v) {

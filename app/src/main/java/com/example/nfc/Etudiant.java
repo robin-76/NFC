@@ -10,20 +10,26 @@ public class Etudiant implements Serializable {
     private String prenom;
     private String nom;
     private String uid;
+    private String heureDebut;
+    private String heureFin;
 
     public Etudiant() {}
 
-    public Etudiant(String prenom, String nom, String uid) {
+    public Etudiant(String prenom, String nom, String uid, String heureDebut, String heureFin) {
         this.prenom = prenom;
         this.nom = nom;
         this.uid = uid;
+        this.heureDebut = heureDebut;
+        this.heureFin = heureFin;
     }
 
-    public Etudiant(int id, String prenom, String nom, String uid) {
+    public Etudiant(int id, String prenom, String nom, String uid, String heureDebut, String heureFin) {
         this.id = id;
         this.prenom = prenom;
         this.nom = nom;
         this.uid = uid;
+        this.heureDebut = heureDebut;
+        this.heureFin = heureFin;
     }
 
     public int getId() {
@@ -58,7 +64,22 @@ public class Etudiant implements Serializable {
         this.uid = uid;
     }
 
-    @NonNull
+    public String getHeureDebut() {
+        return heureDebut;
+    }
+
+    public void setHeureDebut(String heureDebut) {
+        this.heureDebut = heureDebut;
+    }
+
+    public String getHeureFin() {
+        return heureFin;
+    }
+
+    public void setHeureFin(String heureFin) {
+        this.heureFin = heureFin;
+    }
+
     @Override
     public String toString()  {
         return this.nom;
