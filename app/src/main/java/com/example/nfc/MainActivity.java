@@ -16,8 +16,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private final List<Etudiant> etudiantList = new ArrayList<>();
     private final List<Examen> examenList = new ArrayList<>();
+
+    private List<Etudiant> list;
+    private List<Examen> list2;
+
     private MyDatabaseHelper db;
-    private ActivityResultLauncher<Intent> someActivityResultLauncher;
+    private ActivityResultLauncher<Intent> formulaireEtudiant;
+    private ActivityResultLauncher<Intent> formulaireExamen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,22 +32,25 @@ public class MainActivity extends AppCompatActivity {
         db = new MyDatabaseHelper(this);
 
         db.createDefaultEtudiantsIfNeed();
-        List<Etudiant> list=  db.getAllEtudiants();
+        list =  db.getAllEtudiants();
         this.etudiantList.addAll(list);
 
-        for(Etudiant etd: etudiantList) {
-            System.out.println ("etudiant : " + etd.getPrenom() + etd.getNom() + etd.getUid() +etd.getHeureDebut()+etd.getHeureFin());
+        for(Etudiant elem: etudiantList) {
+            System.out.println ("Etudiant n°" + elem.getId() + " : " + elem.getPrenom()
+                    + " " + elem.getNom() + " " + elem.getUid());
         }
 
         db.createExamen();
-        List<Examen> list2=  db.getAllExamens();
+        list2 = db.getAllExamens();
         this.examenList.addAll(list2);
 
         for(Examen exam: examenList) {
-            System.out.println ("examen : " + exam.getDate() + exam.getMatiere() + exam.getProfesseur() +exam.getHeureDebut()+exam.getHeureFin());
+            System.out.println ("Examen n°" + exam.getId() + " : " + exam.getDate()
+                    + " " + exam.getMatiere() + " " + exam.getProfesseur() + " "
+                    + exam.getHeureDebut() + " " + exam.getHeureFin());
         }
 
-       /* someActivityResultLauncher = registerForActivityResult(
+        formulaireEtudiant = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
@@ -53,17 +61,45 @@ public class MainActivity extends AppCompatActivity {
                         String nom = intent.getStringExtra("nom");
                         String uid = intent.getStringExtra("uid");
 
-                        Etudiant nouveau = new Etudiant(prenom, nom, uid);
+                        Etudiant nouveau = new Etudiant(prenom, nom, uid, "", "");
                         db.addEtudiant(nouveau);
 
                         list = db.getAllEtudiants();
                         etudiantList.addAll(list);
 
                         for(Etudiant elem: etudiantList) {
-                            System.out.println ("etudiant : " + elem.getPrenom() + " " + elem.getNom() + " " + elem.getUid());
+                            System.out.println ("Etudiant n°" + elem.getId() + " : " + elem.getPrenom()
+                                    + " " + elem.getNom() + " " + elem.getUid());
                         }
                     }
-                }); */
+                });
+
+        formulaireExamen = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent intent = result.getData();
+                        assert intent != null;
+
+                        String date = intent.getStringExtra("date");
+                        String matiere = intent.getStringExtra("matiere");
+                        String professeur = intent.getStringExtra("professeur");
+                        String heureDebut = intent.getStringExtra("heureDebut");
+                        String heureFin = intent.getStringExtra("heureFin");
+
+                        Examen nouveau = new Examen(date, matiere, professeur, heureDebut, heureFin);
+                        db.addExamen(nouveau);
+
+                        list2 = db.getAllExamens();
+                        examenList.addAll(list2);
+
+                        for(Examen exam: examenList) {
+                            System.out.println ("Examen n°" + exam.getId() + " : " + exam.getDate()
+                                    + " " + exam.getMatiere() + " " + exam.getProfesseur() + " "
+                                    + exam.getHeureDebut() + " " + exam.getHeureFin());
+                        }
+                    }
+                });
     }
 
     public void scan(View v) {
@@ -73,10 +109,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void formulaireEtudiant(View v) {
         Intent intent = new Intent(this, FormulaireEtudiant.class);
-        someActivityResultLauncher.launch(intent);
+        formulaireEtudiant.launch(intent);
+    }
+
+    public void formulaireExamen(View v) {
+        Intent intent = new Intent(this, FormulaireExamen.class);
+        formulaireExamen.launch(intent);
     }
 
     public void reset(View v) {
+        db.deleteAllExamens();
         db.deleteAllEtudiants();
     }
 

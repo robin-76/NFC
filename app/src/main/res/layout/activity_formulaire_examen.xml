@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FormulaireExamen">
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="144dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.773"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:scaleType="centerInside"
+        android:text="Professeur : "
+        app:layout_constraintEnd_toStartOf="@+id/professeur"
+        app:layout_constraintHorizontal_bias="0.788"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/matiere"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="204dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.773"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/heureFin"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="384dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.773"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="404dp"
+        android:scaleType="centerInside"
+        android:text="Heure de fin : "
+        app:layout_constraintEnd_toStartOf="@+id/heureFin"
+        app:layout_constraintHorizontal_bias="0.801"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="224dp"
+        android:scaleType="centerInside"
+        android:text="Matière : "
+        app:layout_constraintEnd_toStartOf="@+id/matiere"
+        app:layout_constraintHorizontal_bias="0.743"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="164dp"
+        android:scaleType="centerInside"
+        android:text="Date : "
+        app:layout_constraintEnd_toStartOf="@+id/date"
+        app:layout_constraintHorizontal_bias="0.717"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="344dp"
+        android:scaleType="centerInside"
+        android:text="Heure de début : "
+        app:layout_constraintEnd_toStartOf="@+id/heureDebut"
+        app:layout_constraintHorizontal_bias="0.864"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/professeur"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="264dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.773"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/heureDebut"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="324dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.773"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="460dp"
+        android:onClick="validate"
+        android:scaleType="centerInside"
+        android:text="Validate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

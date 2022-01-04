@@ -238,4 +238,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("delete from "+ TABLE_ETUDIANT);
     }
+
+    public void deleteAllExamens() {
+        Log.i(TAG, "MyDatabaseHelper.deleteAllExamens ... " );
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+ TABLE_EXAMEN);
+    }
 }

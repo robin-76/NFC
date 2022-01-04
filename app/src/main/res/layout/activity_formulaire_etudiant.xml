@@ -7,74 +7,80 @@
     android:layout_height="match_parent"
     tools:context=".FormulaireEtudiant">
 
+    <EditText
+        android:id="@+id/uid"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="264dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.674"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="160dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="284dp"
         android:scaleType="centerInside"
-        android:text="Prénom : " />
+        android:text="UID : "
+        app:layout_constraintEnd_toStartOf="@+id/uid"
+        app:layout_constraintHorizontal_bias="0.652"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="164dp"
+        android:scaleType="centerInside"
+        android:text="Prénom : "
+        app:layout_constraintEnd_toStartOf="@+id/prenom"
+        app:layout_constraintHorizontal_bias="0.692"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/prenom"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="144dp"
         android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.674"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="220dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="224dp"
         android:scaleType="centerInside"
-        android:text="Nom : " />
+        android:text="Nom : "
+        app:layout_constraintEnd_toStartOf="@+id/nom"
+        app:layout_constraintHorizontal_bias="0.661"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/nom"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="204dp"
         android:text=""
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="280dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scaleType="centerInside"
-        android:text="UID : " />
-
-    <EditText
-        android:id="@+id/uid"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="260dp"
-        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.674"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
         android:layout_marginTop="350dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scaleType="centerInside"
         android:onClick="validate"
-        android:text="Validate" />
+        android:scaleType="centerInside"
+        android:text="Validate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
