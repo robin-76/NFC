@@ -159,8 +159,7 @@ public class MainActivity extends AppCompatActivity {
                         Examen nouveau = new Examen(date, matiere, professeur, heureDebut, heureFin);
                         db.addExamen(nouveau);
 
-                        list2 = db.getAllExamens();
-                        examenList.addAll(list2);
+                        reset();
                     }
                 });
 
