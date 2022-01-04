@@ -57,13 +57,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="resetDB"
-        android:text="Reset heures etudiants"
-        android:textColor="@color/white" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="resetHeures"
         android:text="Reset DB"
         android:textColor="@color/white"
         android:layout_marginBottom="15dp" />
@@ -80,6 +73,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="generatePDF"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:src="@drawable/pdf" />
 </LinearLayout>

@@ -137,6 +137,10 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = result.getData();
                         assert intent != null;
 
+                        for(Etudiant etudiant : etudiantList)
+                            db.deleteHeuresEtudiant(etudiant);
+                        reset();
+
                         choixExam = intent.getStringExtra("choixExamen");
                         button.setText("Choix de l'examen " + " (" + choixExam + ")");
 
@@ -222,12 +226,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void resetHeures(View v) {
-        for(Etudiant etudiant : etudiantList)
-            db.deleteHeuresEtudiant(etudiant);
-        reset();
-    }
-
     public void resetDB(View v) {
         db.deleteAllExamens();
         db.deleteAllEtudiants();
@@ -275,71 +273,75 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void generatePDF(View v) {
-        PdfDocument pdfDocument = new PdfDocument();
+        if(matiere.equals(""))
+            Toast.makeText(this, "Veuillez sélectionner un examen", Toast.LENGTH_SHORT).show();
+        else {
+            PdfDocument pdfDocument = new PdfDocument();
 
-        Paint paint = new Paint();
-        Paint title = new Paint();
+            Paint paint = new Paint();
+            Paint title = new Paint();
 
-        PdfDocument.PageInfo mypageInfo = new PdfDocument.PageInfo.Builder(pagewidth, pageHeight, 1).create();
-        PdfDocument.Page myPage = pdfDocument.startPage(mypageInfo);
+            PdfDocument.PageInfo mypageInfo = new PdfDocument.PageInfo.Builder(pagewidth, pageHeight, 1).create();
+            PdfDocument.Page myPage = pdfDocument.startPage(mypageInfo);
 
-        Canvas canvas = myPage.getCanvas();
-        int xPos = (canvas.getWidth() / 2);
-        canvas.drawBitmap(scaledbmp, 56, 40, paint);
+            Canvas canvas = myPage.getCanvas();
+            int xPos = (canvas.getWidth() / 2);
+            canvas.drawBitmap(scaledbmp, 56, 40, paint);
 
-        title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
-        title.setTextSize(20);
-        title.setTextAlign(Paint.Align.CENTER);
+            title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+            title.setTextSize(20);
+            title.setTextAlign(Paint.Align.CENTER);
 
-        canvas.drawText(date, 720, 230, title);
-        canvas.drawText(matiere, xPos, 265, title);
-        canvas.drawText("(" + professeur + ")", xPos, 300, title);
-        canvas.drawText(heureDebut + " - " + heureFin, xPos, 350, title);
+            canvas.drawText(date, 720, 230, title);
+            canvas.drawText(matiere, xPos, 265, title);
+            canvas.drawText("(" + professeur + ")", xPos, 300, title);
+            canvas.drawText(heureDebut + " - " + heureFin, xPos, 350, title);
 
-        title.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        title.setTextSize(15);
-        title.setTextAlign(Paint.Align.CENTER);
+            title.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+            title.setTextSize(15);
+            title.setTextAlign(Paint.Align.CENTER);
 
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(Color.rgb(0, 0, 0));
-        paint.setStrokeWidth(5);
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setColor(Color.rgb(0, 0, 0));
+            paint.setStrokeWidth(5);
 
-        canvas.drawText("Prénom", 210, 460, title);
-        canvas.drawText("Nom", 340, 460, title);
-        canvas.drawText("Heure début", 460, 460, title);
-        canvas.drawText("Heure fin", 580, 460, title);
-        canvas.drawRect(280, 475, 150, 430, paint);
-        canvas.drawRect(400, 475, 150, 430, paint);
-        canvas.drawRect(520, 475, 150, 430, paint);
-        canvas.drawRect(640, 475, 150, 430, paint);
+            canvas.drawText("Prénom", 210, 460, title);
+            canvas.drawText("Nom", 340, 460, title);
+            canvas.drawText("Heure début", 460, 460, title);
+            canvas.drawText("Heure fin", 580, 460, title);
+            canvas.drawRect(280, 475, 150, 430, paint);
+            canvas.drawRect(400, 475, 150, 430, paint);
+            canvas.drawRect(520, 475, 150, 430, paint);
+            canvas.drawRect(640, 475, 150, 430, paint);
 
-        title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+            title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
 
-        int x = 520;
-        int y = 505;
-        for(Etudiant etd : etudiantList) {
-            canvas.drawText(etd.getPrenom(), 210, y, title);
-            canvas.drawText(etd.getNom(), 340, y, title);
-            canvas.drawText(etd.getHeureDebut(), 460, y, title);
-            canvas.drawText(etd.getHeureFin(), 580, y, title);
-            canvas.drawRect(280, x, 150, 430, paint);
-            canvas.drawRect(400, x, 150, 430, paint);
-            canvas.drawRect(520, x, 150, 430, paint);
-            canvas.drawRect(640, x, 150, 430, paint);
-            y = y + 40;
-            x = x + 40;
+            int x = 520;
+            int y = 505;
+            for(Etudiant etd : etudiantList) {
+                canvas.drawText(etd.getPrenom(), 210, y, title);
+                canvas.drawText(etd.getNom(), 340, y, title);
+                canvas.drawText(etd.getHeureDebut(), 460, y, title);
+                canvas.drawText(etd.getHeureFin(), 580, y, title);
+                canvas.drawRect(280, x, 150, 430, paint);
+                canvas.drawRect(400, x, 150, 430, paint);
+                canvas.drawRect(520, x, 150, 430, paint);
+                canvas.drawRect(640, x, 150, 430, paint);
+                y = y + 40;
+                x = x + 40;
+            }
+
+            pdfDocument.finishPage(myPage);
+            File file = new File(Environment.getExternalStorageDirectory(), "FeuilleEmargement.pdf");
+
+            try {
+                pdfDocument.writeTo(new FileOutputStream(file));
+                Toast.makeText(MainActivity.this, "PDF file generated successfully.", Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            pdfDocument.close();
         }
-
-        pdfDocument.finishPage(myPage);
-        File file = new File(Environment.getExternalStorageDirectory(), "FeuilleEmargement.pdf");
-
-        try {
-            pdfDocument.writeTo(new FileOutputStream(file));
-            Toast.makeText(MainActivity.this, "PDF file generated successfully.", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        pdfDocument.close();
     }
 
     public void quitter(View v) {
