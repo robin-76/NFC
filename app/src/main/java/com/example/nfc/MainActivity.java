@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> choixExamen;
     private ActivityResultLauncher<Intent> formulaireExamen;
 
-    private String date = "04/01/2022 ", matiere = "Web", professeur = "Yohann Pigne";
-    private String heureDebut ="10h30", heureFin ="12h00";
+    private String date = "", matiere = "", professeur = "";
+    private String heureDebut = "", heureFin = "";
 
     private String choixExam;
     private Button button;
@@ -104,8 +104,7 @@ public class MainActivity extends AppCompatActivity {
                             Etudiant nouveau = new Etudiant(prenom, nom, uid, heure, "");
                             db.addEtudiant(nouveau);
 
-                            list = db.getAllEtudiants();
-                            etudiantList.addAll(list);
+                            reset();
                         }
 
                         reset();
@@ -159,8 +158,7 @@ public class MainActivity extends AppCompatActivity {
                         Examen nouveau = new Examen(date, matiere, professeur, heureDebut, heureFin);
                         db.addExamen(nouveau);
 
-                        list2 = db.getAllExamens();
-                        examenList.addAll(list2);
+                        reset();
                     }
                 });
 
@@ -312,8 +310,8 @@ public class MainActivity extends AppCompatActivity {
         for(Etudiant etd : etudiantList) {
             canvas.drawText(etd.getPrenom(), 210, y, title);
             canvas.drawText(etd.getNom(), 340, y, title);
-            canvas.drawText(etd.getNom(), 460, y, title);
-            canvas.drawText(etd.getNom(), 580, y, title);
+            canvas.drawText(etd.getHeureDebut(), 460, y, title);
+            canvas.drawText(etd.getHeureFin(), 580, y, title);
             canvas.drawRect(280, x, 150, 430, paint);
             canvas.drawRect(400, x, 150, 430, paint);
             canvas.drawRect(520, x, 150, 430, paint);
