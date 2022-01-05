@@ -8,7 +8,13 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Calendar;
 
 public class FormulaireExamen extends AppCompatActivity {
@@ -26,10 +32,14 @@ public class FormulaireExamen extends AppCompatActivity {
     private int lastSelectedMinute = -1;
     boolean debut = false;
     boolean fin = false;
+    private FileChooserFragment fragment;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulaire_examen);
+
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        this.fragment = (FileChooserFragment) fragmentManager.findFragmentById(R.id.fragment_fileChooser);
 
         date = findViewById(R.id.date);
         matiere = findViewById(R.id.matiere);
@@ -54,6 +64,32 @@ public class FormulaireExamen extends AppCompatActivity {
         this.lastSelectedYear = c.get(Calendar.YEAR);
         this.lastSelectedMonth = c.get(Calendar.MONTH);
         this.lastSelectedDayOfMonth = c.get(Calendar.DAY_OF_MONTH);
+    }
+
+    public void importCSV(View v) throws IOException {
+        String path = this.fragment.getPath();
+        String line = "";
+        StringBuilder stringBuilder = new StringBuilder();
+        InputStream is = new FileInputStream(path);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        reader.readLine();
+
+        while (true) {
+            try {
+                if ((line = reader.readLine()) == null) break;
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            String[] info = line.split(";");
+            Examen nouveau = new Examen(info[0], info[1], info[2], info[3], info[4]);
+            MyDatabaseHelper db = new MyDatabaseHelper(this);
+            db.addExamen(nouveau);
+
+            stringBuilder.append(line).append("\n");
+        }
+        is.close();
     }
 
     private void buttonSelectDate() {
