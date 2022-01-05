@@ -22,10 +22,10 @@ public class FormulaireExamen extends AppCompatActivity {
     private EditText heureFin;
     DatePickerDialog datePickerDialog;
     TimePickerDialog timePickerDialog;
-    private int lastSelectedHour = -1;
-    private int lastSelectedMinute = -1;
-    boolean debut = false;
-    boolean fin = false;
+    private int lastSelectedHour;
+    private int lastSelectedMinute;
+    boolean debut;
+    boolean fin;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +36,12 @@ public class FormulaireExamen extends AppCompatActivity {
         professeur = findViewById(R.id.professeur);
         heureDebut = findViewById(R.id.heureDebut);
         heureFin = findViewById(R.id.heureFin);
+
+        lastSelectedHour = -1;
+        lastSelectedMinute = -1;
+
+        debut = false;
+        fin = false;
 
         this.date.setOnClickListener(v -> buttonSelectDate());
         this.heureDebut.setOnClickListener(v -> {

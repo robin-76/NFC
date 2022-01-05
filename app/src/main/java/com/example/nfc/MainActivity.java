@@ -49,15 +49,15 @@ public class MainActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> choixExamen;
     private ActivityResultLauncher<Intent> formulaireExamen;
 
-    private String date = "", matiere = "", professeur = "";
-    private String heureDebut = "", heureFin = "";
+    private String date, matiere, professeur;
+    private String heureDebut, heureFin;
 
     private String choixExam;
     private Button button;
 
     ImageView generatePDFimg;
-    int pageHeight = 1120;
-    int pagewidth = 792;
+    int pageHeight;
+    int pagewidth;
     Bitmap bmp, scaledbmp;
 
     private static final int PERMISSION_REQUEST_CODE = 200;
@@ -76,7 +76,15 @@ public class MainActivity extends AppCompatActivity {
         this.examenList.addAll(list2);
 
         choixExam = "";
+        date = "";
+        matiere = "";
+        professeur = "";
+        heureDebut = "";
+        heureFin = "";
         button = findViewById(R.id.choixExamen);
+
+        pageHeight = 1120;
+        pagewidth = 792;
 
         scan = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -110,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
 
                             reset();
                         }
-
                         reset();
                     }
                 });
@@ -129,8 +136,7 @@ public class MainActivity extends AppCompatActivity {
                         Etudiant nouveau = new Etudiant(prenom, nom, uid, "", "");
                         db.addEtudiant(nouveau);
 
-                        list = db.getAllEtudiants();
-                        etudiantList.addAll(list);
+                        reset();
                     }
                 });
 
@@ -183,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
         generatePDFimg = findViewById(R.id.PDFimg);
         bmp = BitmapFactory.decodeResource(getResources(), R.drawable.univ);
         scaledbmp = Bitmap.createScaledBitmap(bmp, 350, 150, false);
+        generatePDFimg.setOnClickListener(this::generatePDF);
 
         if (!checkPermission())
             requestPermission();
