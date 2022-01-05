@@ -127,14 +127,15 @@ public class MainActivity extends AppCompatActivity {
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent intent = result.getData();
-                        assert intent != null;
 
-                        String prenom = intent.getStringExtra("prenom");
-                        String nom = intent.getStringExtra("nom");
-                        String uid = intent.getStringExtra("uid");
+                        if(intent!=null) {
+                            String prenom = intent.getStringExtra("prenom");
+                            String nom = intent.getStringExtra("nom");
+                            String uid = intent.getStringExtra("uid");
 
-                        Etudiant nouveau = new Etudiant(prenom, nom, uid, "", "");
-                        db.addEtudiant(nouveau);
+                            Etudiant nouveau = new Etudiant(prenom, nom, uid, "", "");
+                            db.addEtudiant(nouveau);
+                        }
 
                         reset();
                     }
@@ -171,16 +172,17 @@ public class MainActivity extends AppCompatActivity {
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent intent = result.getData();
-                        assert intent != null;
 
-                        date = intent.getStringExtra("date");
-                        matiere = intent.getStringExtra("matiere");
-                        professeur = intent.getStringExtra("professeur");
-                        heureDebut = intent.getStringExtra("heureDebut");
-                        heureFin = intent.getStringExtra("heureFin");
+                        if(intent!=null) {
+                            date = intent.getStringExtra("date");
+                            matiere = intent.getStringExtra("matiere");
+                            professeur = intent.getStringExtra("professeur");
+                            heureDebut = intent.getStringExtra("heureDebut");
+                            heureFin = intent.getStringExtra("heureFin");
 
-                        Examen nouveau = new Examen(date, matiere, professeur, heureDebut, heureFin);
-                        db.addExamen(nouveau);
+                            Examen nouveau = new Examen(date, matiere, professeur, heureDebut, heureFin);
+                            db.addExamen(nouveau);
+                        }
 
                         reset();
                     }

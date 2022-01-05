@@ -41,6 +41,10 @@ Petite application mobile pour simuler une feuille d'émargement à l'aide du sc
 * *Ajouter un examen*
   
   Permet d'ajouter un examen dans la base de données.
+
+* *Importer CSV*
+
+  Permet d'ajouter une liste d'étudiants ou une liste d'examens en CSV. Des exemples de fichiers CSV sont disponibles dans le projet.
   
 * *Liste des examens*
   
@@ -53,4 +57,4 @@ Petite application mobile pour simuler une feuille d'émargement à l'aide du sc
   
 * *PDF*
 
-  Permet d'imprimer la feuille d'émargement selon l'examen sélectionné.
+  Permet d'imprimer la feuille d'émargement selon l'examen sélectionné. Un exemple de fichier PDF généré est disponible dans le projet.

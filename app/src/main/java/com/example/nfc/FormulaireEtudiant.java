@@ -56,6 +56,8 @@ public class FormulaireEtudiant extends AppCompatActivity {
             stringBuilder.append(line).append("\n");
         }
         is.close();
+        setResult(RESULT_OK);
+        this.finish();
     }
 
     public void validate(View v) {

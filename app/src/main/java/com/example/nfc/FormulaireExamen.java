@@ -96,6 +96,8 @@ public class FormulaireExamen extends AppCompatActivity {
             stringBuilder.append(line).append("\n");
         }
         is.close();
+        setResult(RESULT_OK);
+        this.finish();
     }
 
     private void buttonSelectDate() {
