@@ -47,6 +47,12 @@ public class FormulaireExamen extends AppCompatActivity {
         heureDebut = findViewById(R.id.heureDebut);
         heureFin = findViewById(R.id.heureFin);
 
+        lastSelectedHour = -1;
+        lastSelectedMinute = -1;
+
+        debut = false;
+        fin = false;
+
         this.date.setOnClickListener(v -> buttonSelectDate());
         this.heureDebut.setOnClickListener(v -> {
             buttonSelectTime();

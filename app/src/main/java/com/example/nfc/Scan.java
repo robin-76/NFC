@@ -3,25 +3,19 @@ package com.example.nfc;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.nfc.Tag;
 import android.os.Bundle;
-import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.InputType;
-import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Calendar;
-
 
 public class Scan extends AppCompatActivity {
     private NfcAdapter adapter;
