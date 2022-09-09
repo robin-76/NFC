@@ -58,3 +58,21 @@ Petite application mobile pour simuler une feuille d'émargement à l'aide du sc
 * *PDF*
 
   Permet d'imprimer la feuille d'émargement selon l'examen sélectionné. Un exemple de fichier PDF généré est disponible dans le projet.
+
+## Captures d'écran 
+
+Menu principal :
+
+![Menu](Menu.jpg)
+
+Ajouter un étudiant :
+
+![AjouterEtudiant](AjouterEtudiant.jpg)
+
+Ajouter un examen :
+
+![AjouterExamen](AjouterExamen.jpg)
+
+Fichier PDF généré :
+
+![PDF](FeuilleEmargement.png)
